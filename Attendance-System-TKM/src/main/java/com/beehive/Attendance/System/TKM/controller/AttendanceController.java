@@ -1,9 +1,12 @@
 package com.beehive.Attendance.System.TKM.controller;
 
 import com.beehive.Attendance.System.TKM.Service.AttendanceService;
+import com.beehive.Attendance.System.TKM.dto.AttendanceDto;
 import com.beehive.Attendance.System.TKM.entity.Attendance;
+import jakarta.servlet.annotation.HttpConstraint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +21,15 @@ public class AttendanceController {
     private AttendanceService attendanceService;
 
     @PostMapping
-    public Attendance addOrUpdateAttendance(@RequestBody Attendance attendance){
-        return attendanceService.save(attendance);
+    public ResponseEntity<Void> addOrUpdateAttendance(@RequestBody AttendanceDto attendanceDto){
+        if(attendanceService.save(attendanceDto)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("{studentId}/{date}")
-    public List<Attendance> getAttendanceByStudentIdAndDate(@PathVariable Long studentId, @PathVariable String date){
+    public Attendance getAttendanceByStudentIdAndDate(@PathVariable Long studentId, @PathVariable String date){
         LocalDate attendanceDate = LocalDate.parse(date);
         return attendanceService.findByStudentIdAndDate(studentId, attendanceDate);
     }
