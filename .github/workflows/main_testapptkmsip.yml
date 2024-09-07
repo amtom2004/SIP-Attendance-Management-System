@@ -12,10 +12,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      DB_URL: jdbc:postgresql://testdbtkmsip.postgres.database.azure.com:5432/postgres?sslmode=require
-      DB_USERNAME: sipadmin
-      DB_PASSWORD: Tkm1122334455
+    
     steps:
       - uses: actions/checkout@v4
 
