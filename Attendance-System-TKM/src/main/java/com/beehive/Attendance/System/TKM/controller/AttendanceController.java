@@ -92,4 +92,18 @@ public class AttendanceController {
 
         return ResponseEntity.ok(updatedAttendances);
     }
+
+    @PatchMapping("/mentor/{mentorId}/{date}")
+    public ResponseEntity<List<Attendance>> updateAttendanceByMentor(
+        @PathVariable Long mentorId,
+        @PathVariable String date,
+        @RequestParam Boolean fnAttendance,
+        @RequestParam Boolean anAttendance) {
+
+    LocalDate attendanceDate = LocalDate.parse(date);
+    List<Attendance> updatedAttendances = attendanceService.updateAttendanceByMentor(mentorId, attendanceDate, fnAttendance, anAttendance);
+
+    return ResponseEntity.ok(updatedAttendances);
+}
+
 }
