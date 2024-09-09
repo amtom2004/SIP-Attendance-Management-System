@@ -1,7 +1,9 @@
 package com.beehive.Attendance.System.TKM.Service;
 
 import com.beehive.Attendance.System.TKM.entity.Advisor;
+import com.beehive.Attendance.System.TKM.entity.Student;
 import com.beehive.Attendance.System.TKM.repository.AdvisorRepository;
+import com.beehive.Attendance.System.TKM.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,13 @@ import java.util.Optional;
 public class AdvisorService {
     @Autowired
     private AdvisorRepository advisorRepository;
+
+    @Autowired
+    private StudentRepository studentRepository;
+
+    public List<Student> getStudentByAdvisor(Long id){
+        return studentRepository.findAllByAdvisorId(id);
+    }
 
     public Advisor save(Advisor advisor){
         return advisorRepository.save(advisor);

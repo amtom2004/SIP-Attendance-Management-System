@@ -30,7 +30,7 @@ public class AttendanceController {
     @Autowired
     private AdvisorService advisorService;
 
-    @PostMapping
+    @PatchMapping
     public ResponseEntity<Void> addOrUpdateAttendance(@RequestBody AttendanceDto attendanceDto){
         if(attendanceService.save(attendanceDto)){
             return new ResponseEntity<>(HttpStatus.OK);
