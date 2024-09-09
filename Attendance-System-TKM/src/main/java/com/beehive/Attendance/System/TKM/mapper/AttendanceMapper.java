@@ -18,8 +18,10 @@ public class AttendanceMapper {
         Student student = studentRepository.findById(attendanceDto.getStudentId()).orElse(null);
         if (student == null) throw new AssertionError();
         attendance.setDate(attendanceDto.getDate());
-        attendance.setFnAttendance(attendanceDto.getFnAttendance());
-        attendance.setAnAttendance(attendanceDto.getAnAttendance());
+        if(attendanceDto.getFnAttendance()!=null)
+            attendance.setFnAttendance(attendanceDto.getFnAttendance());
+        if(attendanceDto.getAnAttendance()!=null)
+            attendance.setAnAttendance(attendanceDto.getAnAttendance());
         attendance.setStudent(student);
         attendanceRepository.save(attendance);
         return  attendance;
