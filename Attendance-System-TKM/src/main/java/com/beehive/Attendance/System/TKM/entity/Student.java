@@ -24,6 +24,9 @@ public class Student {
     @Column(name = "admission_no")
     private String admissionNo;
 
+    @Column(name = "attendance_percentage")
+    private Double attendancePercentage;
+
     @ManyToOne
     @JoinColumn(name = "mentor_id", nullable = true)
     private Mentor mentor;
