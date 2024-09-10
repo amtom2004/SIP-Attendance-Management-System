@@ -3,16 +3,11 @@ package com.beehive.Attendance.System.TKM.controller;
 import com.beehive.Attendance.System.TKM.Service.AdvisorService;
 import com.beehive.Attendance.System.TKM.Service.AttendanceService;
 import com.beehive.Attendance.System.TKM.Service.MentorService;
-import com.beehive.Attendance.System.TKM.Service.StudentService;
 import com.beehive.Attendance.System.TKM.dto.AttendanceDto;
 import com.beehive.Attendance.System.TKM.entity.Advisor;
 import com.beehive.Attendance.System.TKM.entity.Attendance;
 import com.beehive.Attendance.System.TKM.entity.Mentor;
-import com.beehive.Attendance.System.TKM.entity.Student;
-
-import jakarta.servlet.annotation.HttpConstraint;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,9 +28,6 @@ public class AttendanceController {
     @Autowired
     private AdvisorService advisorService;
 
-    @Autowired
-    private StudentService studentService;
-
     @PatchMapping
     public ResponseEntity<Void> addOrUpdateAttendance(@RequestBody AttendanceDto attendanceDto){
         if(attendanceService.save(attendanceDto)){
@@ -50,16 +42,16 @@ public class AttendanceController {
         return attendanceService.findByStudentIdAndDate(studentId, attendanceDate);
     }
 
-    @GetMapping("advisor/{advisorId}/{date}")
-    public List<Attendance> getAttendanceByAdvisorIdAndDate(@PathVariable Long advisorId, @PathVariable String date){
+    @GetMapping("department/{departmentId}/{date}")
+    public List<Attendance> getAttendanceByAdvisorIdAndDate(@PathVariable String departmentId, @PathVariable String date){
         LocalDate attendanceDate = LocalDate.parse(date);
-        return attendanceService.findByAdvisorIdAndDate(advisorId, attendanceDate);
+        return attendanceService.findByAdvisorIdAndDate(departmentId, attendanceDate);
     }
 
-    @GetMapping("mentor/{mentorId}/{date}")
-    public List<Attendance> getAttendanceByMentorIdAndDate(@PathVariable Long mentorId, @PathVariable String date){
+    @GetMapping("group/{groupId}/{date}")
+    public List<Attendance> getAttendanceByMentorIdAndDate(@PathVariable String groupId, @PathVariable String date){
         LocalDate attendanceDate = LocalDate.parse(date);
-        return attendanceService.findByMentorIdAndDate(mentorId, attendanceDate);
+        return attendanceService.findByMentorIdAndDate(groupId, attendanceDate);
     }
 
     @GetMapping("mentors")
@@ -70,12 +62,6 @@ public class AttendanceController {
     @GetMapping("advisors")
     public List<Advisor> getAllAdvisors(){
         return advisorService.findAll();
-    }
-
-    @GetMapping("/student/{studentId}")
-    public Student getStudentById(@PathVariable Long studentId) {
-        Student student = studentService.findById(studentId).orElse(null);
-        return student;
     }
 
     @PutMapping("/department/{departmentId}/{date}")
