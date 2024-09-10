@@ -18,8 +18,8 @@ public class AdvisorController {
     AdvisorService advisorService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("advisor/{id}")
-    public List<Student> getStudentsByAdvisor(@PathVariable Long id){
-        return advisorService.getStudentByAdvisor(id);
+    @GetMapping("department/{departmentId}")
+    public List<Student> getStudentsByAdvisor(@PathVariable String departmentId){
+        return advisorService.getStudentByAdvisor(departmentId);
     }
 }

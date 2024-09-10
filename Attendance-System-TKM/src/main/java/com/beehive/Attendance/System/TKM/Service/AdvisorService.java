@@ -19,8 +19,8 @@ public class AdvisorService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public List<Student> getStudentByAdvisor(Long id){
-        return studentRepository.findAllByAdvisorId(id);
+    public List<Student> getStudentByAdvisor(String department){
+        return studentRepository.findAllByDepartment(department);
     }
 
     public Advisor save(Advisor advisor){

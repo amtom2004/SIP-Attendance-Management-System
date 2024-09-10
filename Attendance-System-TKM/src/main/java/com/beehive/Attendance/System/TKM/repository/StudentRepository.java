@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
-    public List<Student> findAllByAdvisorId(Long id);
+    public List<Student> findAllByDepartment(String department);
 
-    public List<Student> findAllByMentorId(Long id);
+    public List<Student> findAllByGroup(String group);
 }

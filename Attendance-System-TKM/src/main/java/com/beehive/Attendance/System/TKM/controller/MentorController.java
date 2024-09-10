@@ -17,8 +17,8 @@ public class MentorController {
     private MentorService mentorService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("mentor/{id}")
-    public List<Student> getAllStudentsByMentorId(@PathVariable Long id){
-        return mentorService.getStudentsByMentorId(id);
+    @GetMapping("group/{groupId}")
+    public List<Student> getAllStudentsByGroupId(@PathVariable String groupId){
+        return mentorService.getStudentsByGroupId(groupId);
     }
 }
