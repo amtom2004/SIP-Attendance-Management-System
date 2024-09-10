@@ -78,29 +78,29 @@ public class AttendanceController {
         return student;
     }
 
-    @PutMapping("/advisor/{advisorId}/{date}")
+    @PutMapping("/department/{departmentId}/{date}")
     public ResponseEntity<List<Attendance>> updateAttendanceByAdvisor(
-            @PathVariable Long advisorId,
+            @PathVariable String departmentId,
             @PathVariable String date,
             @RequestParam Boolean fnAttendance,
             @RequestParam Boolean anAttendance) {
 
         LocalDate attendanceDate = LocalDate.parse(date);
-        List<Attendance> updatedAttendances = attendanceService.updateAttendanceByAdvisor(advisorId, attendanceDate, fnAttendance, anAttendance);
+        List<Attendance> updatedAttendances = attendanceService.updateAttendanceByAdvisor(departmentId, attendanceDate, fnAttendance, anAttendance);
 
         return ResponseEntity.ok(updatedAttendances);
     }
 
     // Endpoint for Mentor to update attendance for all students in their group
-    @PutMapping("/mentor/{mentorId}/{date}")
+    @PutMapping("/group/{groupId}/{date}")
     public ResponseEntity<List<Attendance>> updateAttendanceByMentor(
-            @PathVariable Long mentorId,
+            @PathVariable String groupId,
             @PathVariable String date,
             @RequestParam Boolean fnAttendance,
             @RequestParam Boolean anAttendance) {
 
         LocalDate attendanceDate = LocalDate.parse(date);
-        List<Attendance> updatedAttendances = attendanceService.updateAttendanceByMentor(mentorId, attendanceDate, fnAttendance, anAttendance);
+        List<Attendance> updatedAttendances = attendanceService.updateAttendanceByMentor(groupId, attendanceDate, fnAttendance, anAttendance);
 
         return ResponseEntity.ok(updatedAttendances);
     }
