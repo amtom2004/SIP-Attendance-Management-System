@@ -1,0 +1,224 @@
+{
+	"info": {
+		"_postman_id": "01b651a1-60e8-4be3-82e4-dac345628896",
+		"name": "SIP Attendance",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33483733"
+	},
+	"item": [
+		{
+			"name": "Get by mentor",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Origin",
+						"value": "https://example.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/attendance/group/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"attendance",
+						"group",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all students by Mentor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/attendance/group/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"attendance",
+						"group",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get by mentor Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Origin",
+						"value": "https://example.com",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://sipattendance.onrender.com/api/attendance/advisor/1/2024-09-09",
+					"protocol": "https",
+					"host": [
+						"sipattendance",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"attendance",
+						"advisor",
+						"1",
+						"2024-09-09"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all mentors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/attendance/mentor/1/2024-07-09",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"attendance",
+						"mentor",
+						"1",
+						"2024-07-09"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all advisors",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Origin",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/attendance/department/CSE",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"attendance",
+						"department",
+						"CSE"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get by advisor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/attendance/department/CSE-AI/2024-01-09",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"attendance",
+						"department",
+						"CSE-AI",
+						"2024-01-09"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add attendance",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentId\":\"4\",\r\n    \"date\":\"2024-01-09\",\r\n    \"fnAttendance\":\"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/attendance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"attendance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add attendance Copy",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentId\":\"1\",\r\n    \"date\":\"2024-08-09\",\r\n    \"fnAttendance\":\"true\",\r\n    \"anAttendance\":\"false\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/attendance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"attendance"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
