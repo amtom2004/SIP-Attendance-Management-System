@@ -13,17 +13,16 @@ public class AttendanceMapper {
     public static Attendance mapAttendance(AttendanceDto attendanceDto, AttendanceRepository attendanceRepository,
                                            StudentRepository studentRepository){
         Attendance attendance = attendanceRepository.findByStudentIdAndDate(attendanceDto.getStudentId(), attendanceDto.getDate());
-        if(attendance==null)
+        if(attendance == null) {
             attendance = new Attendance();
-        Student student = studentRepository.findById(attendanceDto.getStudentId()).orElse(null);
-        if (student == null) throw new AssertionError();
+        }
+        Student student = studentRepository.findById(attendanceDto.getStudentId()).orElseThrow(() -> new RuntimeException("Student not found"));
         attendance.setDate(attendanceDto.getDate());
-        if(attendanceDto.getFnAttendance()!=null)
+        if(attendanceDto.getFnAttendance() != null)
             attendance.setFnAttendance(attendanceDto.getFnAttendance());
-        if(attendanceDto.getAnAttendance()!=null)
+        if(attendanceDto.getAnAttendance() != null)
             attendance.setAnAttendance(attendanceDto.getAnAttendance());
         attendance.setStudent(student);
-        attendanceRepository.save(attendance);
-        return  attendance;
+        return attendanceRepository.save(attendance);
     }
 }

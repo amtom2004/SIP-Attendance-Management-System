@@ -55,16 +55,16 @@ public class AttendanceService {
         return attendanceRepository.findByStudentIdAndDate(StudentId, date);
     }
 
-    public List<Attendance> findByAdvisorIdAndDate(Long advisorId, LocalDate date){
-        return attendanceRepository.findByAdvisorIdAndDate(advisorId, date);
+    public List<Attendance> findByAdvisorIdAndDate(String department, LocalDate date){
+        return attendanceRepository.findByDepartmentAndDate(department, date);
     }
 
-    public List<Attendance> findByMentorIdAndDate(Long mentorId, LocalDate date){
-        return attendanceRepository.findByMentorIdAndDate(mentorId, date);
+    public List<Attendance> findByMentorIdAndDate(String group, LocalDate date){
+        return attendanceRepository.findByGroupAndDate(group, date);
     }
 
-    public List<Attendance> updateAttendanceByAdvisor(Long advisorId, LocalDate date, Boolean fnAttendance, Boolean anAttendance){
-        List<Attendance> attendances = attendanceRepository.findByAdvisorIdAndDate(advisorId, date);
+    public List<Attendance> updateAttendanceByAdvisor(String department, LocalDate date, Boolean fnAttendance, Boolean anAttendance){
+        List<Attendance> attendances = attendanceRepository.findByDepartmentAndDate(department, date);
 
         attendances.forEach(attendance -> {
             attendance.setFnAttendance(fnAttendance);
@@ -74,8 +74,8 @@ public class AttendanceService {
         return attendanceRepository.saveAll(attendances);
     }
 
-    public List<Attendance> updateAttendanceByMentor(Long mentorId, LocalDate date, Boolean fnAttendance, Boolean anAttendance){
-        List<Attendance> attendances = attendanceRepository.findByMentorIdAndDate(mentorId, date);
+    public List<Attendance> updateAttendanceByMentor(String  group, LocalDate date, Boolean fnAttendance, Boolean anAttendance){
+        List<Attendance> attendances = attendanceRepository.findByGroupAndDate(group, date);
 
         attendances.forEach(attendance -> {
             attendance.setFnAttendance(fnAttendance);

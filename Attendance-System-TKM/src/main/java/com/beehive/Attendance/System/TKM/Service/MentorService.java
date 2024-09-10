@@ -19,8 +19,8 @@ public class MentorService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public List<Student> getStudentsByMentorId(Long id){
-        return studentRepository.findAllByMentorId(id);
+    public List<Student> getStudentsByGroupId(String groupId){
+        return studentRepository.findAllByGroup(groupId);
     }
 
     public Mentor save(Mentor mentor){

@@ -12,11 +12,11 @@ public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
 
     Attendance findByStudentIdAndDate(Long studentId, LocalDate date);
 
-    @Query("SELECT a FROM Attendance a WHERE a.student.advisor.id = :advisorId AND a.date = :date")
-    List<Attendance> findByAdvisorIdAndDate(Long advisorId, LocalDate date);
+    @Query("SELECT a FROM Attendance a WHERE a.student.department = :department AND a.date = :date")
+    List<Attendance> findByDepartmentAndDate(String department, LocalDate date);
 
-    @Query("SELECT a FROM Attendance a WHERE a.student.mentor.id = :mentorId AND a.date = :date")
-    List<Attendance> findByMentorIdAndDate(Long mentorId, LocalDate date);
+    @Query("SELECT a FROM Attendance a WHERE a.student.group = :group AND a.date = :date") // Updated query
+    List<Attendance> findByGroupAndDate(String group, LocalDate date);
 
     List<Attendance> findAllByStudent(Student student);
 }
