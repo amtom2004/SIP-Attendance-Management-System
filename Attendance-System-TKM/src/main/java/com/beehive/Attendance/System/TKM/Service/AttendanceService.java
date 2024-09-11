@@ -1,6 +1,6 @@
 package com.beehive.Attendance.System.TKM.Service;
 
-import com.beehive.Attendance.System.TKM.dto.AttendanceDto;
+import com.beehive.Attendance.System.TKM.dto.AttendanceRequestDto;
 import com.beehive.Attendance.System.TKM.entity.Attendance;
 import com.beehive.Attendance.System.TKM.entity.Student;
 import com.beehive.Attendance.System.TKM.mapper.AttendanceMapper;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 
@@ -22,8 +21,8 @@ public class AttendanceService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public boolean  save(AttendanceDto attendanceDto){
-        Attendance attendance = AttendanceMapper.mapAttendance(attendanceDto,attendanceRepository,studentRepository);
+    public boolean  save(AttendanceRequestDto attendanceRequestDto){
+        Attendance attendance = AttendanceMapper.mapAttendance(attendanceRequestDto,attendanceRepository,studentRepository);
         Student student = studentRepository.findById(attendance.getStudent().getId()).orElse(null);
         if(student==null)
             return false;
