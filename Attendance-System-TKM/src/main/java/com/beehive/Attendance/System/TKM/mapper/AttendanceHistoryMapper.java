@@ -20,8 +20,10 @@ public class AttendanceHistoryMapper {
         List<DailyAttendance> dailyAttendances = attendances.stream().map(attendance -> {
             DailyAttendance dailyAttendance = new DailyAttendance();
             dailyAttendance.setDate(attendance.getDate());
-            dailyAttendance.setFnAttendance(attendance.getFnAttendance());
-            dailyAttendance.setAnAttendance(attendance.getAnAttendance());
+            if(attendance.getFnAttendance()!=null)
+                dailyAttendance.setFnAttendance(attendance.getFnAttendance());
+            if(attendance.getAnAttendance()!=null)
+                dailyAttendance.setAnAttendance(attendance.getAnAttendance());
             return dailyAttendance;
         }).toList();
 

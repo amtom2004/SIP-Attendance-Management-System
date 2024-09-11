@@ -29,8 +29,8 @@ public class AttendanceController {
     private AdvisorService advisorService;
 
     @PatchMapping
-    public ResponseEntity<Void> addOrUpdateAttendance(@RequestBody AttendanceRequestDto attendanceRequestDto){
-        if(attendanceService.save(attendanceRequestDto)){
+    public ResponseEntity<Void> addOrUpdateAttendance(@RequestBody List<AttendanceRequestDto> attendanceRequestDto){
+        if(attendanceService.addAllAttendance(attendanceRequestDto)){
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

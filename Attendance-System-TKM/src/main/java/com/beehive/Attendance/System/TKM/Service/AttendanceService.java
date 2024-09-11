@@ -1,5 +1,6 @@
 package com.beehive.Attendance.System.TKM.Service;
 
+import com.beehive.Attendance.System.TKM.dto.AttendanceHistoryDto;
 import com.beehive.Attendance.System.TKM.dto.AttendanceRequestDto;
 import com.beehive.Attendance.System.TKM.entity.Attendance;
 import com.beehive.Attendance.System.TKM.entity.Student;
@@ -21,14 +22,20 @@ public class AttendanceService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public boolean  save(AttendanceRequestDto attendanceRequestDto){
+    public boolean addAllAttendance(List<AttendanceRequestDto> attendanceRequestDtos){
+        for(AttendanceRequestDto attendance : attendanceRequestDtos){
+            addAttendance(attendance);
+        }
+        return true;
+    }
+
+    public void addAttendance(AttendanceRequestDto attendanceRequestDto){
         Attendance attendance = AttendanceMapper.mapAttendance(attendanceRequestDto,attendanceRepository,studentRepository);
         Student student = studentRepository.findById(attendance.getStudent().getId()).orElse(null);
         if(student==null)
-            return false;
+            return ;
         updateAttendance(attendance.getStudent());
         attendanceRepository.save(attendance);
-        return true;
     }
 
     public void updateAttendance(Student student){
