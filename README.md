@@ -1,11 +1,38 @@
-# SIP-Attendance-Management-System
-## API Endpoints
+# Attendance System TKM
 
-### Add or Update Attendance
-- **URL:** `/api/attendance`
-- **Method:** `POST`
-- **Description:** Adds or updates attendance records.
-- **Request Body:**
+## Overview
+This project is an attendance management system for TKM.
+
+## Endpoints
+
+### Attendance Endpoints
+
+- **Get Attendance by Department and Date**
+  - **URL**: `/api/attendance/department/{departmentId}/{date}`
+  - **Method**: GET
+  - **Description**: Retrieves attendance records for a specific department on a given date.
+  - **Parameters**:
+    - `departmentId` (String): The ID of the department.
+    - `date` (String): The date for which attendance is to be retrieved (format: `yyyy-MM-dd`).
+
+- **Get Attendance by Mentor Group and Date**
+  - **URL**: `/api/attendance/group/{group}/{date}`
+  - **Method**: GET
+  - **Description**: Retrieves attendance records for a specific mentor group on a given date.
+  - **Parameters**:
+    - `group` (String): The mentor group number.
+    - `date` (String): The date for which attendance is to be retrieved (format: `yyyy-MM-dd`).
+
+- **Update Attendance**
+  - **URL**: `/api/attendance`
+  - **Method**: PATCH
+  - **Description**: Updates attendance records for a specific department on a given date.
+  - **Parameters**:
+    - `departmentId` (String): The ID of the department.
+    - `date` (String): The date for which attendance is to be updated (format: `yyyy-MM-dd`).
+    - `fnAttendance` (Boolean): Forenoon attendance status.
+    - `anAttendance` (Boolean): Afternoon attendance status.
+  - **Request Body:**
   ```json
   {
     "studentId": 1,
@@ -13,25 +40,4 @@
     "fnAttendance": true,
     "anAttendance": false
   }
-  
-### Get Attendance by Advisor
-- **URL:** `/api/attendance/advisor/{advisorId}/{date}`
-- **Method:** `GET`
-- **Description:**  Retrieves attendance records by advisor ID and date.
-- **Path Variables:**
-+ advisorId (Long): ID of the advisor.
-+ date (String): Date of the attendance record in YYYY-MM-DD format.
-- **Responses:**
-+ 200 OK: Returns a list of attendance records.
-+ 404 Not Found: No attendance records found.
 
-### Get Attendance by Mentor
-- **URL:** `/api/attendance/mentor/{mentorId}/{date}`
-- **Method:** GET
-- **Description:** Retrieves attendance records by mentor ID and date.
-- **Path Variables:**
-+ mentorId (Long): ID of the mentor.
-+ date (String): Date of the attendance record in YYYY-MM-DD format.
-- **Responses:**
-+ 200 OK: Returns a list of attendance records.
-+ 404 Not Found: No attendance records found.
