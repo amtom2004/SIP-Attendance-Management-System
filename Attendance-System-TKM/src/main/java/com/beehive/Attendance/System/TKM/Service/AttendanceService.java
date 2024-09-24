@@ -44,10 +44,16 @@ public class AttendanceService {
         int attendedSessions = 0;
 
         for (Attendance attendance : attendanceList) {
-            if (attendance.getFnAttendance()!=null && attendance.getFnAttendance()) {
+            if(attendance.getFnAttendance() == null){
+                totalSessions--;
+            }
+            else if (attendance.getFnAttendance()) {
                 attendedSessions++;
             }
-            if (attendance.getAnAttendance()!=null && attendance.getAnAttendance()) {
+            if( attendance.getAnAttendance()==null ){
+                totalSessions--;
+            }
+            else if (attendance.getAnAttendance()) {
                 attendedSessions++;
             }
         }
