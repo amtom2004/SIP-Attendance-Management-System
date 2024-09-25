@@ -3,20 +3,16 @@ package com.beehive.Attendance.System.TKM.mapper;
 import com.beehive.Attendance.System.TKM.dto.AttendanceHistoryDto;
 import com.beehive.Attendance.System.TKM.dto.DailyAttendance;
 import com.beehive.Attendance.System.TKM.entity.Attendance;
+import com.beehive.Attendance.System.TKM.entity.Student;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AttendanceHistoryMapper {
-    public static AttendanceHistoryDto mapAttendance(List<Attendance> attendances){
-        if(attendances.isEmpty()){
-            return null;
-        }
-
+    public static AttendanceHistoryDto mapAttendance(Student student, List<Attendance> attendances){
         AttendanceHistoryDto attendanceHistoryDto = new AttendanceHistoryDto();
-        attendanceHistoryDto.setId(attendances.get(0).getStudent().getId());
-        attendanceHistoryDto.setName(attendances.get(0).getStudent().getName());
-
+        attendanceHistoryDto.setId(student.getId());
+        attendanceHistoryDto.setName(student.getName());
+        attendanceHistoryDto.setAttendance(student.getAttendancePercentage());
         List<DailyAttendance> dailyAttendances = attendances.stream().map(attendance -> {
             DailyAttendance dailyAttendance = new DailyAttendance();
             dailyAttendance.setDate(attendance.getDate());
@@ -27,7 +23,7 @@ public class AttendanceHistoryMapper {
             return dailyAttendance;
         }).toList();
 
-        attendanceHistoryDto.setAttendances(dailyAttendances);
+        attendanceHistoryDto.setAttendanceList(dailyAttendances);
         return attendanceHistoryDto;
     }
 }

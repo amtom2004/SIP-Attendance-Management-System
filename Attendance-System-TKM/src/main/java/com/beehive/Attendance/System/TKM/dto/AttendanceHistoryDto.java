@@ -14,6 +14,7 @@ import java.util.List;
 public class AttendanceHistoryDto {
     private Long id;
     private String name;
-    private List<DailyAttendance> attendances;
+    private Double attendance;
+    private List<DailyAttendance> attendanceList;
 }
 
