@@ -1,6 +1,7 @@
 package com.beehive.Attendance.System.TKM.Service;
 
-import com.beehive.Attendance.System.TKM.dto.AttendanceDto;
+import com.beehive.Attendance.System.TKM.dto.AttendanceHistoryDto;
+import com.beehive.Attendance.System.TKM.dto.AttendanceRequestDto;
 import com.beehive.Attendance.System.TKM.entity.Attendance;
 import com.beehive.Attendance.System.TKM.entity.Student;
 import com.beehive.Attendance.System.TKM.mapper.AttendanceMapper;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 
@@ -22,14 +22,20 @@ public class AttendanceService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public boolean  save(AttendanceDto attendanceDto){
-        Attendance attendance = AttendanceMapper.mapAttendance(attendanceDto,attendanceRepository,studentRepository);
+    public boolean addAllAttendance(List<AttendanceRequestDto> attendanceRequestDtos){
+        for(AttendanceRequestDto attendance : attendanceRequestDtos){
+            addAttendance(attendance);
+        }
+        return true;
+    }
+
+    public void addAttendance(AttendanceRequestDto attendanceRequestDto){
+        Attendance attendance = AttendanceMapper.mapAttendance(attendanceRequestDto,attendanceRepository,studentRepository);
         Student student = studentRepository.findById(attendance.getStudent().getId()).orElse(null);
         if(student==null)
-            return false;
+            return ;
         updateAttendance(attendance.getStudent());
         attendanceRepository.save(attendance);
-        return true;
     }
 
     public void updateAttendance(Student student){
@@ -38,10 +44,16 @@ public class AttendanceService {
         int attendedSessions = 0;
 
         for (Attendance attendance : attendanceList) {
-            if (attendance.getFnAttendance()!=null && attendance.getFnAttendance()) {
+            if(attendance.getFnAttendance() == null){
+                totalSessions--;
+            }
+            else if (attendance.getFnAttendance()) {
                 attendedSessions++;
             }
-            if (attendance.getAnAttendance()!=null && attendance.getAnAttendance()) {
+            if( attendance.getAnAttendance()==null ){
+                totalSessions--;
+            }
+            else if (attendance.getAnAttendance()) {
                 attendedSessions++;
             }
         }

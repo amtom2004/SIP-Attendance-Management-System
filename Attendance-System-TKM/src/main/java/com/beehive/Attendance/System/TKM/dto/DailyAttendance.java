@@ -1,7 +1,5 @@
 package com.beehive.Attendance.System.TKM.dto;
 
-import com.beehive.Attendance.System.TKM.entity.Student;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,9 +11,8 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AttendanceDto {
-    private Long studentId;
+public class DailyAttendance {
     private LocalDate date;
-    private Boolean fnAttendance;
-    private Boolean anAttendance;
+    private boolean fnAttendance;
+    private boolean anAttendance;
 }

@@ -3,7 +3,7 @@ package com.beehive.Attendance.System.TKM.controller;
 import com.beehive.Attendance.System.TKM.Service.AdvisorService;
 import com.beehive.Attendance.System.TKM.Service.AttendanceService;
 import com.beehive.Attendance.System.TKM.Service.MentorService;
-import com.beehive.Attendance.System.TKM.dto.AttendanceDto;
+import com.beehive.Attendance.System.TKM.dto.AttendanceRequestDto;
 import com.beehive.Attendance.System.TKM.entity.Advisor;
 import com.beehive.Attendance.System.TKM.entity.Attendance;
 import com.beehive.Attendance.System.TKM.entity.Mentor;
@@ -29,8 +29,8 @@ public class AttendanceController {
     private AdvisorService advisorService;
 
     @PatchMapping
-    public ResponseEntity<Void> addOrUpdateAttendance(@RequestBody AttendanceDto attendanceDto){
-        if(attendanceService.save(attendanceDto)){
+    public ResponseEntity<Void> addOrUpdateAttendance(@RequestBody List<AttendanceRequestDto> attendanceRequestDto){
+        if(attendanceService.addAllAttendance(attendanceRequestDto)){
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
